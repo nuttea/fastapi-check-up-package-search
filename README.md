@@ -423,165 +423,106 @@ You need to edit:
 - server url to match your API Endpoint deployed in Cloud Run/Cloud Function/GKE/etc.
 - paths, parameters/responses schema based on your Datastore Type (Unstructure/Structure/BigQuery Table)
 
-```json {"id":"01J1HSJRA7J0D6P6QC6ZW6K9N4"}
-{
-  "openapi": "3.1.0",
-  "info": {
-        "title": "An API for /search with query string to get a list of products list related to the query",
-        "version": "0.1.0"
-    },
-  "servers": [
-        {
-            "url": "https://fast-api-search-products-hz63qipzyq-uc.a.run.app"
-        }
-    ],
-  "paths": {
-    "/search": {
-      "get": {
-        "summary": "Data Store Search",
-        "operationId": "data_store_search_search_get",
-        "parameters": [
-          {
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Query"
-            },
-            "name": "query",
-            "in": "query"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/Item"
-                  },
-                  "type": "array",
-                  "title": "Response Data Store Search Search Get"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "components": {
-    "schemas": {
-      "HTTPValidationError": {
-        "properties": {
-          "detail": {
-            "items": {
-              "$ref": "#/components/schemas/ValidationError"
-            },
-            "type": "array",
-            "title": "Detail"
-          }
-        },
-        "type": "object",
-        "title": "HTTPValidationError"
-      },
-      "Product": {
-        "properties": {
-          "id": {
-            "type": "integer",
-            "title": "Id"
-          },
-          "categories": {
-            "type": "string",
-            "title": "Categories"
-          },
-          "availableTime": {
-            "type": "string",
-            "title": "Availabletime"
-          },
-          "image_uri": {
-            "type": "string",
-            "title": "Image Uri"
-          },
-          "language_code": {
-            "type": "string",
-            "title": "Language Code"
-          },
-          "price": {
-            "type": "number",
-            "title": "Price"
-          },
-          "currency_code": {
-            "type": "string",
-            "title": "Currency Code"
-          },
-          "title": {
-            "type": "string",
-            "title": "Title"
-          },
-          "availableQuantity": {
-            "type": "integer",
-            "title": "Availablequantity"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "categories",
-          "availableTime",
-          "image_uri",
-          "language_code",
-          "price",
-          "currency_code",
-          "title",
-          "availableQuantity"
-        ],
-        "title": "Product"
-      },
-      "ValidationError": {
-        "properties": {
-          "loc": {
-            "items": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
-            },
-            "type": "array",
-            "title": "Location"
-          },
-          "msg": {
-            "type": "string",
-            "title": "Message"
-          },
-          "type": {
-            "type": "string",
-            "title": "Error Type"
-          }
-        },
-        "type": "object",
-        "required": [
-          "loc",
-          "msg",
-          "type"
-        ],
-        "title": "ValidationError"
-      }
-    }
-  }
-}
+```yaml
+openapi: 3.0.0
+info:
+  title: Health Check-up Package Search API
+  version: 1.0.0
+  description: API for searching health check-up packages based on various criteria.
+servers:
+  - url: "https://fast-api-search-products-hz63qipzyq-uc.a.run.app"
+paths:
+  /search_with_filters:
+    get:
+      summary: Search for health check-up packages with filters
+      parameters:
+        - in: query
+          name: query
+          schema:
+            type: string
+          description: Free-text search query
+        - in: query
+          name: filters
+          schema:
+            type: string
+          description: Filter criteria in JSON format. Example "need_pap_smear_test = \"true\" AND package_price_thb<28000"
+      responses:
+        '200':
+          description: Successful search
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CheckupPackage'
+        '400':
+          description: Invalid request
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    CheckupPackage:
+      type: object
+      properties:
+        max_age:
+          type: string
+          description: Maximum age for the package
+        add_on_price_thb:
+          type: integer
+          description: Price of the add-on in Thai Baht
+        gender:
+          type: string
+          description: Gender for the package
+        package_name:
+          type: string
+          description: Name of the package
+        package_code:
+          type: string
+          description: Code of the package
+        included_comprehensive_package:
+          type: boolean
+          description: Whether the package includes a comprehensive check-up
+        ending_result:
+          type: string
+          description: The ending result of the package
+        vegan:
+          type: boolean
+          description: Whether the package is vegan-friendly
+        min_age:
+          type: string
+          description: Minimum age for the package
+        package_price_thb:
+          type: integer
+          description: Price of the package in Thai Baht
+        package_add_on_name:
+          type: string
+          description: Name of the add-on package
+        health_check_up_description:
+          type: string
+          description: Description of the health check-up package
+        need_pap_smear_test:
+          type: boolean
+          description: Whether the package requires a Pap smear test
+        issues_related_to_hormones:
+          type: boolean
+          description: Whether the package is related to hormones
+        add_on_code:
+          type: string
+          description: Code of the add-on package
+      example:
+        max_age: "30"
+        add_on_price_thb: 0
+        gender: "Female"
+        package_name: "Executive Female"
+        package_code: "CKUP1704"
+        included_comprehensive_package: false
+        ending_result: "C"
+        vegan: false
+        min_age: "15"
+        package_price_thb: 17800
+        package_add_on_name: null
+        health_check_up_description: "Executive Program (Female)\n\nPackage Inclusions:\nVital Signs and Physical Examination\nBlood Test\n​Complete Blood Count (CBC)\nFasting Blood Sugar\nHb A1 C\nLipid Fats Profile\n​Cholesterol, HDL and Triglyceride\nCholesterol/HDL ratio  \nLDL Cholesterol\nGout *Uric acid\nKidney Function Panel\nCreatinine\nLiver Function Panel\n​SGOT (AST) and SGPT (ALT)\nAlkaline Phosphatase (ALP)\n 25-OH-Vitamin D3/D2 by LC-MS/MS\nCalcium\nUrine examination \nStool Examination with Occult Blood\nElectrocardiogram (EKG) \nChest X-Ray \nUltrasound Whole Abdomen\nPap Smear and Pelvic Exam\nVitamins & Antioxidants\n​Vitamin A \nVitamin C\nVitamin E\nGamma Tocopherol\nBeta Carotene\nAlpha Carotene\nCoenzyme Q10\nLycopene"
+        need_pap_smear_test: true
+        issues_related_to_hormones: false
+        add_on_code: null
 ```

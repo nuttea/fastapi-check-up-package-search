@@ -4,7 +4,7 @@ runme:
     relativePath: README.md
   session:
     id: 01J1MMFJ56CMVTYK8NCAW86BVH
-    updated: 2024-07-02 00:01:18+07:00
+    updated: 2024-07-02 00:04:01+07:00
 ---
 
 # Fastapi for Vertex AI Search Datastore Retriever
