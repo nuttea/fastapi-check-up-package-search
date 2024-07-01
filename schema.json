@@ -1,0 +1,107 @@
+{
+  "structSchema":
+  {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "add_on_code": {
+        "type": "string",
+        "retrievable": true,
+        "indexable": true,
+        "dynamicFacetable": true,
+        "searchable": true
+      },
+      "add_on_price_thb": {
+        "type": "number",
+        "retrievable": true,
+        "indexable": true,
+        "dynamicFacetable": true,
+        "searchable": false
+      },
+      "ending_result": {
+        "type": "string",
+        "retrievable": true,
+        "indexable": true,
+        "dynamicFacetable": true,
+        "searchable": true
+      },
+      "gender": {
+        "type": "string",
+        "retrievable": true,
+        "indexable": true,
+        "dynamicFacetable": true,
+        "searchable": true
+      },
+      "health_check_up_description": {
+        "type": "string",
+        "keyPropertyMapping": "description",
+        "retrievable": true
+      },
+      "included_comprehensive_package": {
+        "type": "boolean",
+        "retrievable": true,
+        "indexable": true
+      },
+      "issues_related_to_hormones": {
+        "type": "boolean",
+        "retrievable": true,
+        "indexable": true
+      },
+      "liver_and_kidney_problem": {
+        "type": "boolean",
+        "retrievable": true,
+        "indexable": true
+      },
+      "max_age": {
+        "type": "string",
+        "retrievable": true,
+        "indexable": true,
+        "dynamicFacetable": true,
+        "searchable": true
+      },
+      "min_age": {
+        "type": "string",
+        "retrievable": true,
+        "indexable": true,
+        "dynamicFacetable": true,
+        "searchable": true
+      },
+      "need_pap_smear_test": {
+        "type": "boolean",
+        "retrievable": true,
+        "indexable": true
+      },
+      "package_add_on_name": {
+        "type": "string",
+        "retrievable": true,
+        "indexable": true,
+        "dynamicFacetable": true,
+        "searchable": true
+      },
+      "package_code": {
+        "type": "string",
+        "retrievable": true,
+        "indexable": true,
+        "dynamicFacetable": true,
+        "searchable": true
+      },
+      "package_name": {
+        "type": "string",
+        "keyPropertyMapping": "title",
+        "retrievable": true
+      },
+      "package_price_thb": {
+        "type": "number",
+        "retrievable": true,
+        "indexable": true,
+        "dynamicFacetable": true,
+        "searchable": false
+      },
+      "vegan": {
+        "type": "boolean",
+        "retrievable": true,
+        "indexable": true
+      }
+    }
+  }
+}

@@ -1,0 +1,4 @@
+{
+"query": "I am woman, 45 years old",
+"filter": "need_pap_smear_test = \"true\""
+}
