@@ -144,7 +144,7 @@ async def data_store_search_with_filters(query: str, filters: str) -> list[Packa
         query (str): The search query to use.
         filters (str): The filters to apply to the search. 
             Examples: 
-            - "need_pap_smear_test = "true" AND package_price_thb<28000"
+            - "gender: ANY(\"Female\") AND min_age<=38 AND max_age>=38 AND need_pap_smear_test = \"true\" AND included_comprehensive_package = \"true\""
             - "package_price_thb<15000"
 
     Returns:
