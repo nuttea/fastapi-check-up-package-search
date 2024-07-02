@@ -185,6 +185,8 @@ async def data_store_search_with_filters(query: str, filters: str) -> list[Packa
             )
         )
 
+    print(str(items))
+
     return items
 
 if __name__ == "__main__":

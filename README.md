@@ -175,6 +175,16 @@ curl -X POST \
 }'
 ```
 
+Update datastore Schema
+
+```bash {"id":"01J1RPFAVT4GW2DDEJJ97ENY18"}
+curl -X PATCH \
+-H "Authorization: Bearer $(gcloud auth print-access-token)" \
+-H "Content-Type: application/json" \
+--data @"schema.json" \
+"https://discoveryengine.googleapis.com/v1/projects/$PROJECT_ID/locations/global/collections/default_collection/dataStores/${DATA_STORE_ID}/schemas/default_schema"
+```
+
 Import data from BigQuery
 
 ```bash {"id":"01J1HSJRA7J0D6P6QC6BDYW084"}
@@ -211,16 +221,6 @@ curl -X POST \
      "searchTier": "SEARCH_TIER_ENTERPRISE"
    }
 }'
-```
-
-Update datastore Schema
-
-```bash {"id":"01J1QE88CB9A8HPFMJHJGNY8C4"}
-curl -X PATCH \
--H "Authorization: Bearer $(gcloud auth print-access-token)" \
--H "Content-Type: application/json" \
---data @"schema.json" \
-"https://discoveryengine.googleapis.com/v1/projects/$PROJECT_ID/locations/global/collections/default_collection/dataStores/${DATA_STORE_ID}/schemas/default_schema"
 ```
 
 Test get search result (You may need to wait 5 mins on the newly created datastore)
