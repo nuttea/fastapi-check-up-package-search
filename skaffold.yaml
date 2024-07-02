@@ -1,0 +1,19 @@
+apiVersion: skaffold/v4beta10
+kind: Config
+metadata:
+  name: fastapi-check-up-package-search
+build:
+  artifacts:
+    - image: gcr.io/nuttee-lab-00/fastapi-checkup-packages-search
+      docker:
+        dockerfile: Dockerfile
+  tagPolicy:
+    sha256: {}
+  googleCloudBuild: {}
+manifests:
+  rawYaml:
+    - k8s/fastapi-checkup-packages-search.yaml
+deploy:
+  statusCheckDeadlineSeconds: 600
+  tolerateFailuresUntilDeadline: true
+  kubectl: {}

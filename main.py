@@ -18,8 +18,8 @@ if os.getenv('API_ENV') != 'production':
 
 project_id = os.environ.get('PROJECT_ID', 'nuttee-lab-00')
 location = os.environ.get('LOCATION', 'us-central1')
-search_engine_id = os.environ.get('SEARCH_ENGINE_ID', 'recommend_products')
-data_store_id = os.environ.get('DATA_STORE_ID', 'recommend_products_nuttee-lab-00')
+search_engine_id = os.environ.get('SEARCH_ENGINE_ID', 'checkup_packages')
+data_store_id = os.environ.get('DATA_STORE_ID', 'checkup_packages_nuttee-lab-00')
 data_store_location = os.environ.get('DATA_STORE_LOCATION', 'global')
 max_documents = os.environ.get('MAX_DOCUMENTS', '5')
 engine_data_type = os.environ.get('ENGINE_DATA_TYPE', '1')
