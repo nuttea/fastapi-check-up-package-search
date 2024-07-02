@@ -53,18 +53,18 @@
         "indexable": true
       },
       "max_age": {
-        "type": "string",
+        "type": "number",
         "retrievable": true,
         "indexable": true,
         "dynamicFacetable": true,
-        "searchable": true
+        "searchable": false
       },
       "min_age": {
-        "type": "string",
+        "type": "number",
         "retrievable": true,
         "indexable": true,
         "dynamicFacetable": true,
-        "searchable": true
+        "searchable": false
       },
       "need_pap_smear_test": {
         "type": "boolean",

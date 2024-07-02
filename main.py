@@ -64,7 +64,8 @@ class Package(BaseModel):
     Represents a health check-up package object.
 
     Attributes:
-        max_age (str): The maximum age for the package.
+        min_age (int): The minimum age for the package.
+        max_age (int): The maximum age for the package.
         add_on_price_thb (int): The price of the add-on in Thai Baht.
         gender (str): The gender the package is intended for.
         package_name (str): The name of the package.
@@ -72,7 +73,6 @@ class Package(BaseModel):
         included_comprehensive_package (bool): Whether the package includes a comprehensive check-up.
         ending_result (str): The ending result of the package.
         vegan (bool): Whether the package is vegan-friendly.
-        min_age (str): The minimum age for the package.
         package_price_thb (int): The price of the package in Thai Baht.
         package_add_on_name (str): The name of the add-on package.
         health_check_up_description (str): A description of the health check-up package.
@@ -80,20 +80,20 @@ class Package(BaseModel):
         issues_related_to_hormones (bool): Whether the package is related to hormones.
         add_on_code (str): The code of the add-on package.
     """
-    max_age: str
-    add_on_price_thb: int
+    min_age: int
+    max_age: int
     gender: str
     package_name: str
     package_code: str
-    included_comprehensive_package: bool
     ending_result: str
-    vegan: bool
-    min_age: str
     package_price_thb: int
-    package_add_on_name: str
     health_check_up_description: str
+    vegan: bool
+    included_comprehensive_package: bool
     need_pap_smear_test: bool
     issues_related_to_hormones: bool
+    package_add_on_name: str
+    add_on_price_thb: int
     add_on_code: str
 
 @app.get("/search")
@@ -114,7 +114,7 @@ async def data_store_search(query: str) -> list[Package]:
         row = json.loads(doc.page_content)
         items.append(
             Package(
-                max_age = row.get("max_age", ''),
+                max_age = row.get("max_age", 9999),
                 gender = row.get("gender", ''),
                 package_name = row.get("package_name", ''),
                 package_code = row.get("package_code", ''),
@@ -167,7 +167,7 @@ async def data_store_search_with_filters(query: str, filters: str) -> list[Packa
         row = json.loads(doc.page_content)
         items.append(
             Package(
-                max_age = row.get("max_age", ''),
+                max_age = row.get("max_age", 9999),
                 gender = row.get("gender", ''),
                 package_name = row.get("package_name", ''),
                 package_code = row.get("package_code", ''),

@@ -31,7 +31,7 @@ BQ_TABLE="checkup_packages"
 BQ_BUCKET="${PROJECT_ID}-${BQ_DATASET}"
 
 DATA_STORE_ID_PREFIX="checkup_packages"
-DATA_STORE_ID="${DATA_STORE_ID_PREFIX}_${PROJECT_ID}"
+DATA_STORE_ID="${DATA_STORE_ID_PREFIX}_${PROJECT_ID}_01"
 DATA_STORE_DISPLAY_NAME="Recommendation Check-up Packages"
 SEARCH_APP_ID="checkup_packages"
 SEARCH_APP_DISPLAY_NAME="Recommend Check-up Packages App"
@@ -167,7 +167,7 @@ curl -X POST \
 -H "Authorization: Bearer $(gcloud auth print-access-token)" \
 -H "Content-Type: application/json" \
 -H "X-Goog-User-Project: $PROJECT_ID" \
-"https://discoveryengine.googleapis.com/v1alpha/projects/$PROJECT_ID/locations/global/collections/default_collection/dataStores?dataStoreId=${DATA_STORE_ID_PREFIX}_${PROJECT_ID}" \
+"https://discoveryengine.googleapis.com/v1alpha/projects/$PROJECT_ID/locations/global/collections/default_collection/dataStores?dataStoreId=${DATA_STORE_ID}" \
 -d '{
   "displayName": "'"$DATA_STORE_DISPLAY_NAME"'",
   "industryVertical": "GENERIC",
@@ -181,7 +181,7 @@ Import data from BigQuery
 curl -X POST \
 -H "Authorization: Bearer $(gcloud auth print-access-token)" \
 -H "Content-Type: application/json" \
-"https://discoveryengine.googleapis.com/v1/projects/$PROJECT_ID/locations/global/collections/default_collection/dataStores/${DATA_STORE_ID_PREFIX}_${PROJECT_ID}/branches/0/documents:import" \
+"https://discoveryengine.googleapis.com/v1/projects/$PROJECT_ID/locations/global/collections/default_collection/dataStores/${DATA_STORE_ID}/branches/0/documents:import" \
 -d '{
   "bigquerySource": {
     "projectId": "'"$PROJECT_ID"'",
@@ -205,7 +205,7 @@ curl -X POST \
 "https://discoveryengine.googleapis.com/v1/projects/$PROJECT_ID/locations/global/collections/default_collection/engines?engineId=$SEARCH_APP_ID" \
 -d '{
   "displayName": "'"$SEARCH_APP_DISPLAY_NAME"'",
-  "dataStoreIds": ["'"${DATA_STORE_ID_PREFIX}_${PROJECT_ID}"'"],
+  "dataStoreIds": ["'"${DATA_STORE_ID}"'"],
   "solutionType": "SOLUTION_TYPE_SEARCH",
   "searchEngineConfig": {
      "searchTier": "SEARCH_TIER_ENTERPRISE"
@@ -220,7 +220,7 @@ curl -X PATCH \
 -H "Authorization: Bearer $(gcloud auth print-access-token)" \
 -H "Content-Type: application/json" \
 --data @"schema.json" \
-"https://discoveryengine.googleapis.com/v1/projects/$PROJECT_ID/locations/global/collections/default_collection/dataStores/${DATA_STORE_ID_PREFIX}_${PROJECT_ID}/schemas/default_schema"
+"https://discoveryengine.googleapis.com/v1/projects/$PROJECT_ID/locations/global/collections/default_collection/dataStores/${DATA_STORE_ID}/schemas/default_schema"
 ```
 
 Test get search result (You may need to wait 5 mins on the newly created datastore)
